@@ -1,0 +1,16 @@
+﻿@* 18. login register linki için _loginPartial ın oluşturulması *@
+
+@if (User.Identity.Name != null)
+{
+    @* <form asp-page="/Auth/Logout" method="post" class="navbar-nav">
+        <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+    </form> *@
+    <span>Hoşgeldin @User.Identity.Name</span>
+    <a class="nav-link text-dark" asp-controller="Auth" asp-action="Logout" style="width:200px">Çıkış</a>
+}
+else
+{
+    <a class="nav-link text-dark" asp-controller="Auth" asp-action="Login" style="width:200px">Giriş Yap</a>
+
+    <a class="nav-link text-dark" asp-controller="Auth" asp-action="Register"style="width:200px">Editör Ol</a>
+}

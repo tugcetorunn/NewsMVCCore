@@ -1,0 +1,71 @@
+﻿@model IEnumerable<MVCCore11IdentityUygulama.ViewModels.Haberler.HaberListeleVM>
+
+@{
+    ViewData["Title"] = "Haberler";
+}
+
+<h1>Haberler</h1>
+
+<p>
+    <a asp-action="HaberEkle">Yeni Haber Oluştur</a> @* sadece editörlere ve admine gözüksün *@
+</p>
+<div asp-validation-summary="All"></div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ResimYolu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Baslik)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OlusturulmaTarihi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kategori)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Editor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+    <input type="hidden" asp-for="@item.HaberId"/>
+        <tr>
+            <td>
+                <img src="~/images/@item.ResimYolu" style="width: 200px; height:150px" />
+            </td>
+            <td>
+                <a asp-action="Detay" asp-route-id="@item.HaberId">@Html.DisplayFor(modelItem => item.Baslik)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OlusturulmaTarihi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kategori)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Editor)
+            </td>
+            <td>
+                <a asp-route-id="@item.HaberId" asp-action="Detay" class="btn btn-primary mt-2">Detay</a> <br />
+
+                    @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+                    {
+                        <a asp-route-id="@item.HaberId" asp-action="HaberGuncelle" class="btn btn-secondary mt-2">Düzenle</a> <br />
+
+                        if (User.IsInRole("Admin"))
+                        {
+                            <a asp-route-id="@item.HaberId" asp-action="Sil" class="btn btn-danger mt-2" onclick="return confirm('Emin misiniz?')">Sil</a>
+                        }
+                    }
+                    
+                    
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,47 @@
+﻿@model MVCCore11IdentityUygulama.ViewModels.Haberler.HaberEkleFormVM
+
+@{
+    ViewData["Title"] = "Haber Ekle";
+}
+
+<h1>Yeni Haber Oluştur</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="HaberEkle" enctype="multipart/form-data">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Haber.Baslik" class="control-label"></label>
+                <input asp-for="Haber.Baslik" class="form-control" />
+                <span asp-validation-for="Haber.Baslik" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Haber.Detay" class="control-label"></label>
+                <textarea asp-for="Haber.Detay" class="form-control"></textarea>
+                <span asp-validation-for="Haber.Detay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Haber.KategoriId" class="control-label"></label>
+                <select asp-for="Haber.KategoriId" asp-items="@Model.Kategoriler" class="form-control"></select>
+                <span asp-validation-for="Haber.KategoriId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Haber.ResimDosyasi" class="control-label"></label>
+                <input type="file" asp-for="Haber.ResimDosyasi" class="form-control" />
+                <span asp-validation-for="Haber.ResimDosyasi" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <input type="submit" value="Haber Oluştur" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Haberleri görüntüle</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

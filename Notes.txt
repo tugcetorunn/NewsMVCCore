@@ -1,0 +1,17 @@
+﻿Üyelik sistemi olan bir haber sitesi geliştiriniz.
+
+Kullanılacak teknolojiler;
+- SQL Server,
+- ASP.NET MVC Core,
+- Entity Framework Core Code First => Model First,
+- Identity,
+
+Haber -> başlık, detay, resim, eklendiği tarih, ekleyen üye, kategori
+Kategori
+Editör
+Rol (admin, editör)
+
+Admin -> silme, güncelleme, ekleme
+Editör -> kendi eklediklerini güncelleme, ekleme
+
+Üye olmayan herkes tüm haberleri görebilir. aynı zamanda detay sayfasına gidebilir.

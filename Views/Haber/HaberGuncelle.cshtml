@@ -1,0 +1,59 @@
+﻿@model MVCCore11IdentityUygulama.ViewModels.Haberler.HaberGuncelleFormVM
+
+@{
+    ViewData["Title"] = "HaberGuncelle";
+}
+
+<h1>HaberGuncelle</h1>
+
+<h4>HaberGuncelleVM</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="HaberGuncelle" enctype="multipart/form-data">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <input type="hidden" asp-for="Haber.HaberId" class="form-control" />
+                <span asp-validation-for="Haber.HaberId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Haber.Baslik" class="control-label"></label>
+                <input asp-for="Haber.Baslik" class="form-control" />
+                <span asp-validation-for="Haber.Baslik" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Haber.Detay" class="control-label"></label>
+                <textarea asp-for="Haber.Detay" class="form-control"></textarea>
+                <span asp-validation-for="Haber.Detay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @* <label asp-for="Haber.ResimYolu" class="control-label"></label> *@
+                <br />
+                <img src="/images/@Model.Haber.ResimYolu" style="width: 200px; height: 150px" />
+                <span asp-validation-for="Haber.ResimYolu" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Haber.ResimDosyasi" class="control-label"></label>
+                <input type="hidden" asp-for="Haber.ResimYolu" /> @* eski haberdeki reim gelmesi için gerekli *@
+                <input type="file" asp-for="Haber.ResimDosyasi" class="form-control" />
+                <span asp-validation-for="Haber.ResimYolu" class="text-danger"></span> @**@
+            </div>
+            <div class="form-group">
+                <label asp-for="Haber.KategoriId" class="control-label"></label>
+                <select asp-for="Haber.KategoriId" asp-items="Model.Kategoriler" class="form-control"></select>
+                <span asp-validation-for="Haber.KategoriId" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <input type="submit" value="Haberi Güncelle" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Haberleri görüntüle</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
